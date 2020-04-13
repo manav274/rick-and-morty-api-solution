@@ -112,11 +112,7 @@ class Container extends React.Component {
                 <div className="row">
                     <FiltersView filters={this.state.filter} filter={(el) => this.filter(el)} />
                     <ContentView getData={url => this.getCharacters(url)} info={this.state.info} list={list} filters={this.state.filter} closeFilter={(el, index) => this.closeFilter(el, index)} />
-                </div><br />
-
-                <footer className="text-center text-small">
-                    <p>@ 2020 Publicis Sapient</p>
-                </footer>
+                </div>
             </div>
         } else {
             return <h1>LOADING</h1>

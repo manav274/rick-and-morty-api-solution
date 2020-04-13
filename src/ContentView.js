@@ -68,9 +68,9 @@ class ContentView extends React.Component {
                 <div className="col-md-12">{filtersMarkup}</div>
             </div>
             <div className="row">
-                <div className="col-md-10 col-sm-12 mb-3">
+                <div className="col-md-10 col-sm-12 mb-3 search-char">
                     <div className="input-group">
-                        <input type="text" className="form-control col-md-6" placeholder="Enter name" onChange={e => this.searchField(e)} onKeyPress={e => this.keyPress(e)} />
+                        <input type="text" className="form-control col-md-4" placeholder="Enter name" onChange={e => this.searchField(e)} onKeyPress={e => this.keyPress(e)} />
                         <div className="input-group-append">
                             <button className={`btn btn-secondary ${this.state.search ? "disabled" : ""}`} onClick={() => this.searchFunction()}>Search</button>
                         </div>
