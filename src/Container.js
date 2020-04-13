@@ -19,7 +19,17 @@ class Container extends React.Component {
         this.getCharacters(this.state.url);
     }
 
-   
+    filter(el) {
+        let newState = JSON.parse(JSON.stringify(this.state));
+        let currentFilter = newState.filter[el[0]];
+        let pos = currentFilter.indexOf(el[1]);
+        if (pos < 0) {
+            currentFilter.push(el[1]);
+        } else {
+            currentFilter.splice(pos, 1);
+        }
+        this.setState(newState);
+    }
 
     getCharacters(url) {
         fetch(url)
@@ -40,6 +50,20 @@ class Container extends React.Component {
             .catch(err => {
                 console.log('Fetch Error: +', err);
             });
+    }
+
+    closeFilter(el, index) {
+        let newState = JSON.parse(JSON.stringify(this.state));
+        let currentFilter = newState.filter;
+
+        for (let item in currentFilter) {
+            let pos = currentFilter[item].indexOf(el);
+            if (pos !== -1) {
+                currentFilter[item].splice(pos, 1);
+                break;
+            }
+        }
+        this.setState(newState);
     }
 
     render() {
@@ -86,7 +110,13 @@ class Container extends React.Component {
 
             return <div className="container-fluid">
                 <div className="row">
-                   </div>
+                    <FiltersView filters={this.state.filter} filter={(el) => this.filter(el)} />
+                    <ContentView getData={url => this.getCharacters(url)} info={this.state.info} list={list} filters={this.state.filter} closeFilter={(el, index) => this.closeFilter(el, index)} />
+                </div><br />
+
+                <footer className="text-center text-small">
+                    <p>@ 2020 Publicis Sapient</p>
+                </footer>
             </div>
         } else {
             return <h1>LOADING</h1>
